@@ -1,0 +1,20 @@
+from fastapi import FastAPI , UploadFile , File
+from langchain_pipeline import ask_llm
+from documents_util import load_pdf
+from chroma_utils import add_docs_to_chroma
+
+app =FastAPI()
+
+@app.post("/upload")
+async def upload_file(file:UploadFile=File(...)):
+    with open("temp.pdf","wb") as f:
+        f.write(await file.read())
+    docs=load_pdf("temp.pdf")
+    print("document is: ",docs)
+    add_docs_to_chroma(docs)
+    return {"message":"Document processed and added to Vector DB"}
+
+@app.post("/ask")
+async def ask(query: str):
+    result=ask_llm(query)
+    return {"response": result['result']}
