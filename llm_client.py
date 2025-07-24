@@ -1,9 +1,14 @@
 # llm_client.py
 from openai import OpenAI
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+api_key = os.getenv("OPENROUTER_API_KEY")
 
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key="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",
+    api_key=api_key,
 )
 
 def ask_deepseek(prompt: str) -> str:
