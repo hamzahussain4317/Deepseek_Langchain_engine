@@ -13,6 +13,3 @@ openrouter
 langchain-huggingface
 openai
 pypdf
-
-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
-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
