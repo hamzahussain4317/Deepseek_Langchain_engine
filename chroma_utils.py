@@ -18,7 +18,6 @@ def add_docs_to_chroma(docs:list[Document]):
     for doc in docs:
       print(doc.metadata)
     vectordb.add_documents(docs)
-    # vectordb.persist()
 
 def setup_bm25_retriever(docs:list[Document]):
     global bm25_retriever
@@ -47,10 +46,7 @@ def search_chroma(query):
             docs = vectordb.similarity_search(query, k=3, filter={"regulation_number": reg_number})
             results.extend(docs)
         return results
-    # else:
-    #     # No specific regulation mentioned, do general search
-    #     return vectordb.similarity_search(query, k=3)
-    # # return vectordb.similarity_search(query, k=2)
+    #hybrid searching BM25
     if bm25_retriever:
         bm25_docs=bm25_retriever.get_relevant_documents(query)
         vector_docs=vectordb.similarity_search(query,k=3)

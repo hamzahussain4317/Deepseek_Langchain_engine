@@ -1,26 +1,3 @@
-# from langchain_community.document_loaders import PyPDFLoader
-# from langchain.schema import Document
-# import re
-# def load_pdf(path:str):
-#     loader=PyPDFLoader(path)
-#     pages=loader.load()
-
-#     full_text="\n".join([p.page_content for p in pages])
-
-#     pattern=re.compile(r"(REGULATION\s*[-–]?\s*(\d+)\s*\n([^\n]+)\n)(.*?)(?=(REGULATION\s*[-–]?\s*\d+\s*\n|$))", re.DOTALL)
-#     matches=pattern.findall(full_text)
-#     documents=[]
-
-#     for idx,(header,reg_num,reg_title,content,_) in enumerate(matches):
-#         page_content=f"{header}{content}".strip()
-#         metadata={
-#             "regulation_number":reg_num.strip(),
-#             "title":reg_title.strip(),
-#             "chunk_id":idx
-#         }
-#         documents.append(Document(page_content=page_content,metadata=metadata))
-#         return documents
-
 import re
 from PyPDF2 import PdfReader
 from langchain.schema import Document
