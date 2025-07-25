@@ -2,7 +2,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 from langchain.schema import Document
 from langchain_community.retrievers import BM25Retriever
-from fuzzywordsdetection import extract_regulation_number
+from fuzzy_search import extract_regulation_number
 import os,shutil,re
  
 

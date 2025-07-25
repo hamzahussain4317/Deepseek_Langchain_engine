@@ -1,6 +1,6 @@
 from fastapi import FastAPI , UploadFile , File
 from fastapi.middleware.cors import CORSMiddleware
-from langchain_pipeline import ask_llm
+from rag_pipeline import ask_llm
 from documents_util import load_pdf
 from chroma_utils import add_docs_to_chroma , setup_bm25_retriever
 
