@@ -13,3 +13,11 @@ openrouter
 langchain-huggingface
 openai
 pypdf
+streamlit
+requests
+rapidfuzz
+re
+dotenv
+os
+shutil
+PyPDF2
