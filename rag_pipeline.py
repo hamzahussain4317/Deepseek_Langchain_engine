@@ -1,11 +1,15 @@
-from chroma_utils import search_chroma
 from llm_client import ask_deepseek
+from query_understanding_agent import parse_query_with_llm
+from retriever_agent import retrieve_document
+
 
 def ask_llm(query:str):
     #retrieve document from chroma
-    relevant_docs = search_chroma(query)
-    print("relevant docs: ",relevant_docs)
-    context = "\n\n".join([doc.page_content for doc in relevant_docs])
+    parsed = parse_query_with_llm(query)
+    print("Parsed Query:", parsed)
+    docs=retrieve_document(query,parsed)
+    context = "\n\n".join([doc.page_content for doc in docs])
+    print("context: ",context)
     #sending extracted document and user query to LLM
     prompt = (
     f"Use the following context extracted from **AML Regulation** to answer the question accurately. "
