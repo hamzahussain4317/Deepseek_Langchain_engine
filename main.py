@@ -1,7 +1,9 @@
 from fastapi import FastAPI , UploadFile , File
 from fastapi.middleware.cors import CORSMiddleware
-from rag_pipeline import ask_llm
+from rag_pipeline import ask_llm , extract_requirements
 from documents_util import load_pdf
+import os
+# from documents_util import load_all_pdfs_with_llm
 from chroma_utils import add_docs_to_chroma , setup_bm25_retriever
 
 
@@ -24,8 +26,14 @@ async def upload_file(file:UploadFile=File(...)):
     setup_bm25_retriever(docs)
     return {"message":"Document processed and added to Vector DB"}
 
+
 #user QA endpoint
 @app.post("/ask")
 async def ask(query: str):
     result=ask_llm(query)
     return {"response": result['result']}
+
+
+@app.post("/requirements")
+async def requirements():
+   extract_requirements()
